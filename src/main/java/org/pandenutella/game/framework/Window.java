@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import java.awt.Dimension;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Window {
 
@@ -13,6 +15,12 @@ public class Window {
 
     public static void initialize(String title, Dimension dimension) {
         INSTANCE = new Window(title, dimension);
+        INSTANCE.frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                GameLoop.stop();
+            }
+        });
     }
 
     public static Window getInstance() {
