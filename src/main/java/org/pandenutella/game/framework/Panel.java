@@ -1,6 +1,7 @@
 package org.pandenutella.game.framework;
 
 import lombok.Getter;
+import org.pandenutella.game.framework.state.GameStateManager;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -27,5 +28,7 @@ public class Panel extends JPanel {
 
         g.setColor(BACKGROUND_COLOR);
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
+
+        GameStateManager.getInstance().render(g);
     }
 }

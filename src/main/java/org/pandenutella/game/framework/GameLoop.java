@@ -1,5 +1,7 @@
 package org.pandenutella.game.framework;
 
+import org.pandenutella.game.framework.state.GameStateManager;
+
 public class GameLoop implements Runnable {
 
     private static GameLoop INSTANCE;
@@ -39,18 +41,10 @@ public class GameLoop implements Runnable {
             long currentNano = System.nanoTime();
             double deltaSeconds = (currentNano - lastNano) / 1000000000.0;
 
-            update(deltaSeconds);
-            render();
+            GameStateManager.getInstance().update(deltaSeconds);
+            Window.getInstance().repaint();
 
             lastNano = currentNano;
         }
-    }
-
-    private void update(double deltaSeconds) {
-        System.out.println(deltaSeconds);
-    }
-
-    private void render() {
-        Window.getInstance().repaint();
     }
 }
