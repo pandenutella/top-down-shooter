@@ -3,6 +3,9 @@ package org.pandenutella.game.tds.state;
 import org.pandenutella.game.framework.Window;
 import org.pandenutella.game.framework.input.KeyboardController;
 import org.pandenutella.game.framework.state.GameState;
+import org.pandenutella.game.framework.state.GameStateManager;
+import org.pandenutella.game.tds.constant.State;
+import org.pandenutella.game.tds.utility.StopWatch;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,9 +13,11 @@ import java.awt.Graphics;
 
 public class LoadingState implements GameState {
 
+    private final StopWatch loadingTimer = new StopWatch();
+
     @Override
     public void enter() {
-
+        loadingTimer.start(3.0);
     }
 
     @Override
@@ -22,7 +27,10 @@ public class LoadingState implements GameState {
 
     @Override
     public void update(double deltaSeconds) {
-
+        loadingTimer.update(deltaSeconds);
+        if (loadingTimer.hasElapsed()) {
+            GameStateManager.getInstance().changeState(State.IN_GAME.getName());
+        }
     }
 
     @Override
